@@ -18,7 +18,7 @@ npm run debug
 
 Access server in Powershell using curl:
 
-curl http://localhost:8080\
+curl http://localhost:8080 \
 curl -s localhost:8080 | jq
 
 Create/remove a breakpoint: F9
