@@ -14,12 +14,12 @@ Ways to start server:
 
 npm start\
 npm run dev\
-npm run debug\
+npm run debug
 
 Access server in Powershell using curl:
 
 curl http://localhost:8080\
-curl -s localhost:8080 | jq\
+curl -s localhost:8080 | jq
 
 Create/remove a breakpoint: F9
 
@@ -28,4 +28,4 @@ Using git:
 Add files: git add FILENAME\
 Commit: git commit -m COMMENT\
 Push: git push origin\
-Check for uncommitted files: git status\
+Check for uncommitted files: git status
