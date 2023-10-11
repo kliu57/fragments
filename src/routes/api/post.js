@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     await fragment.save();
 
     // Get current host name
-    const host = `https://${req.headers.host}` || process.env.API_URL;
+    const host = process.env.API_URL || `http://${req.headers.host}`;
 
     let url = new URL(`/v1/fragments/${fragment.id}`, host);
 
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     // return HTTP 201 with Location header with full URL of new fragment
     res
       .status(201)
-      .setHeader('Location', url)
+      .location(url)
       .json(
         response.createSuccessResponse({
           fragment: fragment,
