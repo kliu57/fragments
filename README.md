@@ -66,4 +66,4 @@ On local, copy tgz file from Local to EC2: `pscp -P 22 -i F:\REPOS\fragments\.ss
 On EC2, extract files from tgz file: `tar -xvzf fragments-0.0.1.tgz` \
 On EC2, go into package dir: `cd package` \
 On EC2, do npm install: `npm install` \
-On local, copy .env file from Local to EC2: `pscp -P 22 -i F:\REPOS\fragments\.ssh\ccp555-key-pair.ppk F:\REPOS\fragments\.env ec2-user@<Public IPv4 DNS>:package/.env` \
+On local, copy .env file from Local to EC2: `pscp -P 22 -i F:\REPOS\fragments\.ssh\ccp555-key-pair.ppk F:\REPOS\fragments\.env ec2-user@<Public IPv4 DNS>:package/.env`
