@@ -1,0 +1,49 @@
+# This is text file that will define all the Docker instructions necessary for Docker Engine to build an image of your service
+
+# specifies the parent (or base) image to use as a starting point for our own image
+# our fragments image will be based on other Docker images
+# Use node version 18.13.0
+FROM node:18.17.1
+
+# define some metadata about your image (who is mainting this image, what this image is used for)
+LABEL maintainer="Katie Liu <kliu57@myseneca.ca>"
+LABEL description="Fragments node.js microservice"
+
+# define any environment variables you want to include
+# We default to use port 8080 in our service
+ENV PORT=8080
+
+# Reduce npm spam when installing within Docker
+# https://docs.npmjs.com/cli/v8/using-npm/config#loglevel
+ENV NPM_CONFIG_LOGLEVEL=warn
+
+# Disable colour when run inside Docker
+# https://docs.npmjs.com/cli/v8/using-npm/config#color
+ENV NPM_CONFIG_COLOR=false
+
+# Use /app as our working directory
+# create the /app directory, since it won't exist, and then enter it (i.e., cd /app)
+WORKDIR /app
+
+# Option 2: relative path - Copy the package.json and package-lock.json
+# files into the working dir (/app).  NOTE: this requires that we have
+# already set our WORKDIR in a previous step.
+COPY package*.json ./
+
+# execute a command and cache this layer
+# Install node dependencies defined in package-lock.json
+RUN npm install
+
+# Copy src to /app/src/
+COPY ./src ./src
+
+# Copy our HTPASSWD file
+COPY ./tests/.htpasswd ./tests/.htpasswd
+
+# define the command to run in order to start our container
+# Start the container by running our server
+CMD npm start
+
+# indicate the port(s) that a container will listen on when run
+# We run our service on port 8080
+EXPOSE 8080
