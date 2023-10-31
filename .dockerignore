@@ -6,7 +6,12 @@ tests/
 !tests/.htpasswd
 .env
 .eslintrc.js
-.git/
-.gitignore
+.git*
 .prettier*
 jest*
+.docusaurus/
+.husky/
+build/
+!LICENSE.md
+*.md
+.ssh/
