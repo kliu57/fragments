@@ -58,7 +58,7 @@ COPY ./tests/.htpasswd ./tests/.htpasswd
 
 # define the command to run in order to start our container
 # Start the container by running our server
-CMD ["npm start"]
+CMD ["npm", "start"]
 
 # indicate the port(s) that a container will listen on when run
 # We run our service on port 8080
