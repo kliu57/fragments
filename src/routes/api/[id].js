@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   let id = req.params.id;
 
   // Get extension
-  ext = path.extname(id);
+  ext = path.extname(id).substring(1);
   // Get id without extension
   id = path.parse(id).name;
 
