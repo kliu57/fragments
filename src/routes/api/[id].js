@@ -2,10 +2,9 @@
 
 // import functions in src/response.js
 const response = require('../../response');
-
 const { Fragment } = require('../../model/fragment');
-
 const logger = require('../../logger');
+const path = require('path');
 
 /**
  * Returns an existing fragment (only plain text support required at this point)
@@ -22,14 +21,10 @@ module.exports = async (req, res) => {
   // Get id from dynamic value from url
   let id = req.params.id;
 
-  // Check if id has optional extension
-  let splitID = id.split('.');
-  if (splitID.length > 1) {
-    // Get extension and remove from array
-    ext = splitID.pop();
-    // Get id without extension
-    id = splitID.join('.');
-  }
+  // Get extension
+  ext = path.extname(id);
+  // Get id without extension
+  id = path.parse(id).name;
 
   try {
     // Check if id represents known fragment

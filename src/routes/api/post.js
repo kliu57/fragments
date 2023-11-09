@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   logger.debug('POST /fragments route accessed');
 
   // Check if we can parse this content type
-  if (Buffer.isBuffer(req.body) === true && req.is('text/plain')) {
+  if (Buffer.isBuffer(req.body) === true && Fragment.isSupportedType(req)) {
     // create new fragment
     const fragment = new Fragment({
       ownerId: req.user,

@@ -131,7 +131,12 @@ class Fragment {
 
     if (data) {
       this.updated = new Date().toISOString(); // set updated datetime
+
       this.size = Buffer.byteLength(data); // set size to be number of bytes of data
+
+      // Saves the current fragment to the database
+      this.save();
+
       return await writeFragmentData(this.ownerId, this.id, data);
     } else {
       throw new Error(`data string is required`);
