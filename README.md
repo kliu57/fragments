@@ -30,17 +30,18 @@ node.js based REST API using Express
 - Click **Login** button
 - Log in with Amazon Cognito credentials
 
-## Create text fragment and store it in the fragments server (Test POST /fragments)
+## Create fragment and store it in the fragments server (Test POST /fragments)
 
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
 - Open Dev Tools **Network** tab
-- Type fragment data text into input field and click "Post text fragment" button
+- Select fragment data type from drop down
+- Type fragment data into input field and click "Post fragment" button
 - In **Network tab**, click "fragments" and in **Headers** see the following:
   - Request URL: `<API_URL>/v1/fragments`
   - Request Method: `POST`
   - Status Code: `201`
   - Location: `<API_URL>/v1/fragments/<fragment id>`
-  - Content-Type: `text-plain`
+  - Content-Type: `<fragment data type>`
 - In **Response** see the JSON containing status and fragment metadata:
 
 ```
@@ -91,7 +92,7 @@ node.js based REST API using Express
 - In **Response** see the JSON containing status and data:
 
 ```
-{"status":"ok","data":"This is a fragment}
+{"status":"ok","data":"This is a fragment"}
 ```
 
 ## Access health check route (Test GET /)
