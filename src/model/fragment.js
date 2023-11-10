@@ -173,16 +173,23 @@ class Fragment {
 
   /**
    * Returns the formats into which this fragment type can be converted
+   * Only type of conversion supported currently is markdown -> html
    * @returns {Array<string>} list of supported mime types
    */
   get formats() {
     logger.debug('Called Fragment formats()');
     if (this.isText) {
-      return ['text/plain'];
+      if (this.type === 'text/markdown') {
+        return ['text/markdown', 'text/html'];
+      } else {
+        return [this.type];
+      }
     } else if (this.isImage) {
-      return ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
+      return [this.type];
+      // return ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     } else if (this.type === 'application/json') {
-      return ['application/json', 'text/plain'];
+      return ['application/json'];
+      // return ['application/json', 'text/plain'];
     }
     return [];
   }

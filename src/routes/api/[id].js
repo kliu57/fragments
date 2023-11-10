@@ -5,9 +5,11 @@ const response = require('../../response');
 const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
 const path = require('path');
+const markdownIt = require('markdown-it'),
+  md = new markdownIt();
 
 /**
- * Returns an existing fragment (only plain text support required at this point)
+ * Returns an existing fragment
  */
 module.exports = async (req, res) => {
   logger.debug('GET /fragments/:id route accessed');
@@ -33,6 +35,9 @@ module.exports = async (req, res) => {
     // Get fragment data
     data = await fragment.getData();
 
+    // Get current type of the fragment
+    currentType = fragment.type;
+
     // Check if extension is provided - meaning we have to convert the fragment
     if (ext) {
       // Get the desired conversion type from the extension
@@ -49,21 +54,29 @@ module.exports = async (req, res) => {
       } else if (ext === 'json') {
         convertToType = 'application/json';
       }
+    }
 
+    // Check if conversion is desired
+    if (convertToType != '' && currentType != convertToType) {
       // Check if desired conversion type is supported
       if (Fragment.isSupportedType(convertToType)) {
-        // Get current type of the fragment
-        currentType = fragment.type;
-
         // Get list of types the current fragment can be converted into
         futureTypes = fragment.formats;
 
         // Check if desired type is one of the types we can convert into
         if (futureTypes.includes(convertToType)) {
+          let convertedData = data.toString();
+
+          if (currentType == 'text/markdown' && convertToType == 'text/html') {
+            // Convert markdown -> html using markdown-it
+            convertedData = md.render(data.toString());
+            logger.debug('Markdown data converted to HTML');
+          }
+
           // Return the raw fragment data using the desired type (for now this can only be text)
           res.status(200).json(
             response.createSuccessResponse({
-              data: data.toString(),
+              data: convertedData,
             })
           );
         } else {
@@ -84,7 +97,7 @@ module.exports = async (req, res) => {
           .json(response.createErrorResponse(415, 'extension does not represent a supported type'));
       }
     } else {
-      // No extension, no need to convert the fragment
+      // No extension (no request for conversion) or the current type is already the desired type
       // Return the raw fragment data using the type specified when created (for now this can only be text)
       res.status(200).json(
         response.createSuccessResponse({

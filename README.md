@@ -58,7 +58,7 @@ node.js based REST API using Express
 }
 ```
 
-## Get list of user's existing fragment IDs (Test GET /fragments)
+## Get list of user's existing fragment IDs (Test /fragments)
 
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
 - Open Dev Tools **Network** tab
