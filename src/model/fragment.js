@@ -109,7 +109,7 @@ class Fragment {
   async save() {
     logger.debug('Called Fragment save()');
     this.updated = new Date().toISOString(); // set updated datetime
-    return await writeFragment(this);
+    return await writeFragment(this); // write a fragment's metadata to memory db
   }
 
   /**
@@ -130,13 +130,10 @@ class Fragment {
     logger.debug(`Called Fragment setData(${data})`);
 
     if (data) {
-      this.updated = new Date().toISOString(); // set updated datetime
-
       this.size = Buffer.byteLength(data); // set size to be number of bytes of data
+      this.save(); // saves the current fragment to the database
 
-      // Saves the current fragment to the database
-      this.save();
-
+      // write a fragment's data buffer to memory db
       return await writeFragmentData(this.ownerId, this.id, data);
     } else {
       throw new Error(`data string is required`);

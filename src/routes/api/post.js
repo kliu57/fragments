@@ -14,19 +14,18 @@ module.exports = async (req, res) => {
   logger.debug('POST /fragments route accessed');
 
   // Check if we can parse this content type
-  if (Buffer.isBuffer(req.body) === true && Fragment.isSupportedType(req.headers['content-type'])) {
+  let fragmentType = req.headers['content-type'];
+
+  if (Buffer.isBuffer(req.body) === true && Fragment.isSupportedType(fragmentType)) {
     // create new fragment
     const fragment = new Fragment({
       ownerId: req.user,
-      type: 'text/plain',
+      type: fragmentType,
       size: 0,
     });
 
     // set fragment data to raw binary data in the body of the request
     await fragment.setData(req.body);
-
-    // save fragment to db
-    await fragment.save();
 
     // Get current host name
     const host = process.env.API_URL || `http://${req.headers.host}`;

@@ -27,7 +27,7 @@ node.js based REST API using Express
 ## Access front end and login
 
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
-- Click **Login\*\*** button
+- Click **Login** button
 - Log in with Amazon Cognito credentials
 
 ## Create text fragment and store it in the fragments server (Test POST /fragments)
