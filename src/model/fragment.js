@@ -182,7 +182,7 @@ class Fragment {
       if (this.type === 'text/markdown') {
         return ['text/markdown', 'text/html'];
       } else {
-        return [this.type];
+        return ['text/plain'];
       }
     } else if (this.isImage) {
       return [this.type];
