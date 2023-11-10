@@ -91,7 +91,7 @@ node.js based REST API using Express
 - In **Response** see the JSON containing status and data:
 
 ```
-{"status":"ok","data":"\"1234567890\""}
+{"status":"ok","data":"This is a fragment}
 ```
 
 ## Access health check route (Test GET /)
