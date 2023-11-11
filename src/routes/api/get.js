@@ -13,9 +13,10 @@ const logger = require('../../logger');
 module.exports = async (req, res) => {
   logger.debug('GET /fragments route accessed');
 
-  // Get user fragments
-  let fragments = await Fragment.byUser(req.user, false);
+  // Get user fragments (expanded or not), pass expand param in route
+  let fragments = await Fragment.byUser(req.user, req.query.expand === '1');
 
+  // Send user fragments (expanded or not)
   // Send a 200 'OK' response using function from src/response.js
   res.status(200).json(
     response.createSuccessResponse({

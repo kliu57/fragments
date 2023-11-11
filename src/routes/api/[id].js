@@ -7,25 +7,7 @@ const logger = require('../../logger');
 const path = require('path');
 const markdownIt = require('markdown-it'),
   md = new markdownIt();
-
-// Function to get the data type from an extension
-function getMimeType(ext) {
-  if (ext === '.txt') {
-    return 'text/plain';
-  } else if (ext === '.md') {
-    return 'text/markdown';
-  } else if (ext === '.html') {
-    return 'text/html';
-  } else if (ext === '.png' || ext === '.webp' || ext === '.gif') {
-    return `image/${ext}`;
-  } else if (ext === '.jpg' || ext === '.jpeg') {
-    return 'image/jpeg';
-  } else if (ext === '.json') {
-    return 'application/json';
-  } else {
-    return '';
-  }
-}
+const mime = require('mime-types');
 
 /**
  * Returns an existing fragment
@@ -57,7 +39,7 @@ module.exports = async (req, res) => {
     currentType = fragment.type;
 
     // Get the desired conversion data type from the extension
-    convertToType = getMimeType(ext);
+    convertToType = mime.contentType(ext);
 
     if (ext === '') {
       // No extension supplied (no request for conversion)
@@ -65,7 +47,7 @@ module.exports = async (req, res) => {
       res.status(200).json(
         response.createSuccessResponse({
           headers: { 'Content-Type': currentType },
-          data: data.toString(),
+          data: data,
         })
       );
     } else if (Fragment.isSupportedType(convertToType)) {
@@ -73,7 +55,7 @@ module.exports = async (req, res) => {
 
       // Check if desired type is one of the types we can convert into
       if (fragment.formats.includes(convertToType)) {
-        let convertedData = data.toString();
+        let convertedData = data;
 
         if (currentType == 'text/markdown' && convertToType == 'text/html') {
           // Convert markdown -> html using markdown-it
