@@ -189,16 +189,16 @@ class Fragment {
     logger.debug('Called Fragment formats()');
     if (this.isText) {
       if (this.type === 'text/markdown') {
-        return ['text/markdown', 'text/html'];
+        return [this.mimeType, 'text/html'];
       } else {
-        return ['text/plain'];
+        return [this.mimeType];
       }
     } else if (this.isImage) {
-      return [this.type];
+      return [this.mimeType];
       // return ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     } else if (this.type === 'application/json') {
-      return ['application/json'];
-      // return ['application/json', 'text/plain'];
+      return [this.mimeType];
+      // return [this.mimeType, 'text/plain'];
     }
     return [];
   }
