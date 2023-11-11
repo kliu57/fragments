@@ -38,8 +38,8 @@ describe('GET /v1/fragments/:id', () => {
       .get('/v1/fragments/fragmentID')
       .auth('user1@email.com', 'password1');
     expect(res.statusCode).toBe(200);
-    expect(res.body.status).toBe('ok');
-    expect(res.body.data).toBe('This is a fragment');
+    expect(res.type).toBe('text/plain');
+    expect(Buffer.from(res.text).toString()).toBe('This is a fragment');
   });
 
   // Using a valid username/password pair with invalid fragment id should give a HTTP 404 error
@@ -57,8 +57,8 @@ describe('GET /v1/fragments/:id', () => {
       .get('/v1/fragments/fragmentID.txt')
       .auth('user1@email.com', 'password1');
     expect(res.statusCode).toBe(200);
-    expect(res.body.status).toBe('ok');
-    expect(res.body.data).toBe('This is a fragment');
+    expect(res.type).toBe('text/plain');
+    expect(Buffer.from(res.text).toString()).toBe('This is a fragment');
   });
 
   // Using a valid username/password pair with unsupported ext should give a HTTP 415 error
