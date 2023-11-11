@@ -122,6 +122,15 @@ class Fragment {
   }
 
   /**
+   * Gets the fragment's metadata from the database
+   * @returns Promise<Buffer>
+   */
+  async getMetaData() {
+    logger.debug('Called Fragment getMetaData()');
+    return await readFragment(this.ownerId, this.id);
+  }
+
+  /**
    * Set's the fragment's data in the database
    * @param {Buffer} data
    * @returns Promise<void>

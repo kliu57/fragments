@@ -33,6 +33,9 @@ router.get('/fragments', require('./get'));
 // Define GET /fragments/:id route
 router.get('/fragments/:id', require('./[id]'));
 
+// Define GET /fragments/:id/info route
+router.get('/fragments/:id/info', require('./[id]/info'));
+
 // Define POST /fragments route
 // Use a raw body parser for POST, which will give a `Buffer` Object or `{}` at `req.body`
 // You can use Buffer.isBuffer(req.body) to test if it was parsed by the raw body parser.
