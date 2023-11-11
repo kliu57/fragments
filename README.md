@@ -125,7 +125,7 @@ node.js based REST API using Express
   - Request Method: `GET`
   - Status Code: `200`
   - Content-Type: `<fragment data type>`
-- In **Response** see the JSON containing fragment metadata:
+- In **Response** see the raw data:
 
 ```
 <p>cat</p>
@@ -140,7 +140,7 @@ node.js based REST API using Express
   - Request URL: `<API_URL>/v1/fragments/<fragment id>/info`
   - Request Method: `GET`
   - Status Code: `200`
-- In **Response** see the raw data:
+- In **Response** see the JSON containing fragment metadata:
 
 ```
 {
