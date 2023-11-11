@@ -9,7 +9,7 @@ const markdownIt = require('markdown-it'),
   md = new markdownIt();
 
 // Function to get the data type from an extension
-function getDataType(ext) {
+function getMimeType(ext) {
   if (ext === '.txt') {
     return 'text/plain';
   } else if (ext === '.md') {
@@ -57,13 +57,14 @@ module.exports = async (req, res) => {
     currentType = fragment.type;
 
     // Get the desired conversion data type from the extension
-    convertToType = getDataType(ext);
+    convertToType = getMimeType(ext);
 
     if (ext === '') {
       // No extension supplied (no request for conversion)
       // Return the raw fragment data using the type specified when created (for now this can only be text)
       res.status(200).json(
         response.createSuccessResponse({
+          headers: { 'Content-Type': currentType },
           data: data.toString(),
         })
       );
@@ -83,6 +84,7 @@ module.exports = async (req, res) => {
         // Return the raw fragment data using the desired type
         res.status(200).json(
           response.createSuccessResponse({
+            headers: { 'Content-Type': convertToType },
             data: convertedData,
           })
         );
