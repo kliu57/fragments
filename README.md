@@ -80,6 +80,41 @@ node.js based REST API using Express
 }
 ```
 
+## Get list of user's expanded existing fragment IDs (Test /fragments)
+
+- Open [http://localhost:1234/](http://localhost:1234/) in browser
+- Open Dev Tools **Network** tab
+- Click "Get expanded user fragments" button
+- In **Network tab**, click "fragments" and in **Headers** see the following:
+  - Request URL: `<API_URL>/v1/fragments?expand=1`
+  - Request Method: `GET`
+  - Status Code: `200`
+- In **Response** see the JSON containing status and array of expanded fragments:
+
+```
+{
+  "status": "ok",
+  "fragments": [
+    {
+      "id": "b9e7a264-630f-436d-a785-27f30233faea",
+      "ownerId": "11d4c22e42c8f61feaba154683dea407b101cfd90987dda9e342843263ca420a",
+      "created": "2021-11-02T15:09:50.403Z",
+      "updated": "2021-11-02T15:09:50.403Z",
+      "type": "text/plain",
+      "size": 256
+    },
+    {
+      "id": "dad25b07-8cd6-498b-9aaf-46d358ea97fe",
+      "ownerId": "11d4c22e42c8f61feaba154683dea407b101cfd90987dda9e342843263ca420a",
+      "created": "2021-11-02T15:09:50.403Z",
+      "updated": "2021-11-02T15:09:50.403Z",
+      "type": "text/plain",
+      "size": 256
+    }
+  ]
+}
+```
+
 ## Get an existing fragment by ID (Test GET /fragments/:id)
 
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
@@ -89,10 +124,36 @@ node.js based REST API using Express
   - Request URL: `<API_URL>/v1/fragments/<fragment id>`
   - Request Method: `GET`
   - Status Code: `200`
-- In **Response** see the JSON containing status and data:
+  - Content-Type: `<fragment data type>`
+- In **Response** see the JSON containing fragment metadata:
 
 ```
-{"status":"ok","data":"This is a fragment"}
+<p>cat</p>
+```
+
+## Get an existing fragment metadata by ID (Test GET /fragments/:id/info)
+
+- Open [http://localhost:1234/](http://localhost:1234/) in browser
+- Open Dev Tools **Network** tab
+- Type fragment ID into input field and click "Get user fragment metadata by ID" button
+- In **Network tab**, click "<fragment ID>" and in **Headers** see the following:
+  - Request URL: `<API_URL>/v1/fragments/<fragment id>/info`
+  - Request Method: `GET`
+  - Status Code: `200`
+- In **Response** see the raw data:
+
+```
+{
+    "status": "ok",
+    "fragment": {
+        "id": "38c6834b-ff83-4136-8181-bcf14727a84d",
+        "ownerId": "53b2dca8af985c8469a50737cd16d43f9b4df32f5d547db45b7b7f48bc7c994d",
+        "created": "2023-11-11T07:08:46.411Z",
+        "updated": "2023-11-11T07:08:46.411Z",
+        "type": "text/markdown",
+        "size": 3
+    }
+}
 ```
 
 ## Access health check route (Test GET /)
