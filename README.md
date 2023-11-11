@@ -120,7 +120,7 @@ node.js based REST API using Express
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
 - Open Dev Tools **Network** tab
 - Type fragment ID into input field and click "Get user fragment by ID" button
-- In **Network tab**, click "<fragment ID>" and in **Headers** see the following:
+- In **Network tab**, click \<fragment ID\> and in **Headers** see the following:
   - Request URL: `<API_URL>/v1/fragments/<fragment id>`
   - Request Method: `GET`
   - Status Code: `200`
@@ -136,7 +136,7 @@ node.js based REST API using Express
 - Open [http://localhost:1234/](http://localhost:1234/) in browser
 - Open Dev Tools **Network** tab
 - Type fragment ID into input field and click "Get user fragment metadata by ID" button
-- In **Network tab**, click "<fragment ID>" and in **Headers** see the following:
+- In **Network tab**, click \<fragment ID\> and in **Headers** see the following:
   - Request URL: `<API_URL>/v1/fragments/<fragment id>/info`
   - Request Method: `GET`
   - Status Code: `200`
