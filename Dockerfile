@@ -6,7 +6,7 @@
 
 # specifies the parent (or base) image to use as a starting point for our own image
 # our fragments image will be based on other Docker images
-FROM node:18.17.1@sha256:933bcfad91e9052a02bc29eb5aa29033e542afac4174f9524b79066d97b23c24 AS dependencies
+FROM node:20.9.0@sha256:5f21943fe97b24ae1740da6d7b9c56ac43fe3495acb47c1b232b0a352b02a25c AS dependencies
 
 # Use /app as our working directory
 # create the /app directory, since it won't exist, and then enter it (i.e., cd /app)
@@ -24,7 +24,7 @@ RUN npm install
 ########################################################################################################################
 
 # Stage 1: Run the site
-FROM node:18.17.1@sha256:933bcfad91e9052a02bc29eb5aa29033e542afac4174f9524b79066d97b23c24 AS build
+FROM node:20.9.0@sha256:5f21943fe97b24ae1740da6d7b9c56ac43fe3495acb47c1b232b0a352b02a25c AS build
 
 ENV NODE_ENV=production
 
