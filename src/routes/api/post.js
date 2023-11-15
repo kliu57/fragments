@@ -16,6 +16,10 @@ module.exports = async (req, res) => {
   // Check if we can parse this content type
   let fragmentType = req.headers['content-type'];
 
+  logger.debug(Buffer.isBuffer(req.body));
+  logger.debug(`fragment type is ${fragmentType}`);
+  logger.debug(Fragment.isSupportedType(fragmentType));
+
   if (Buffer.isBuffer(req.body) === true && Fragment.isSupportedType(fragmentType)) {
     // create new fragment
     const fragment = new Fragment({
