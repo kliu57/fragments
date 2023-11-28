@@ -41,6 +41,10 @@
         {
           "name": "PORT",
           "value": "8080"
+        },
+        {
+          "name": "AWS_S3_BUCKET_NAME",
+          "value": "kliu57-fragments"
         }
       ],
       "resourceRequirements": null,
@@ -76,7 +80,7 @@
   ],
   "placementConstraints": [],
   "memory": "512",
-  "taskRoleArn": null,
+  "taskRoleArn": "arn:aws:iam::495495920121:role/LabRole",
   "compatibilities": ["EC2", "FARGATE"],
   "taskDefinitionArn": "arn:aws:ecs:us-east-1:495495920121:task-definition/fragments-task:1",
   "family": "fragments-task",
