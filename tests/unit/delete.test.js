@@ -2,9 +2,7 @@
 // tests src/routes/api/delete.js file
 
 const request = require('supertest');
-
 const app = require('../../src/app');
-
 const hash = require('../../src/hash');
 
 // Prior to running tests, insert data into db

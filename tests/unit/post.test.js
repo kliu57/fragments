@@ -2,7 +2,6 @@
 // tests src/routes/api/post.js file
 
 const request = require('supertest');
-
 const app = require('../../src/app');
 
 /**

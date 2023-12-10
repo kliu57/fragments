@@ -8,6 +8,7 @@ const path = require('path');
 const markdownIt = require('markdown-it'),
   md = new markdownIt();
 const mime = require('mime-types');
+const sharp = require('sharp');
 
 /**
  * Returns an existing fragment
@@ -57,6 +58,19 @@ module.exports = async (req, res) => {
         if (currentType == 'text/markdown' && convertToType == 'text/html') {
           // Convert markdown -> html using markdown-it
           convertedData = md.render(data.toString());
+        }
+
+        if (fragment.formats.isImage) {
+          // Convert image using sharp
+          if (convertToType == 'image/png') {
+            convertedData = await sharp(data).png().toBuffer();
+          } else if (convertToType == 'image/jpeg' || convertToType == 'image/jpg') {
+            convertedData = await sharp(data).jpeg().toBuffer();
+          } else if (convertToType == 'image/webp') {
+            convertedData = await sharp(data).webp().toBuffer();
+          } else if (convertToType == 'image/gif') {
+            convertedData = await sharp(data).gif().toBuffer();
+          }
         }
 
         // Return the raw fragment data using the desired type

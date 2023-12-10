@@ -88,8 +88,6 @@ class Fragment {
       throw new Error(`fragment not found`);
     }
 
-    // return fragment;
-
     return new Fragment({ ...fragment });
   }
 
@@ -196,11 +194,9 @@ class Fragment {
         return [this.mimeType];
       }
     } else if (this.isImage) {
-      return [this.mimeType];
-      // return ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
+      return ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     } else if (this.type === 'application/json') {
-      return [this.mimeType];
-      // return [this.mimeType, 'text/plain'];
+      return [this.mimeType, 'text/plain'];
     }
     return [];
   }

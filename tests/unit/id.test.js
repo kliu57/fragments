@@ -2,14 +2,11 @@
 // tests src/routes/api/[id].js file
 
 const request = require('supertest');
-
 const app = require('../../src/app');
-
 const hash = require('../../src/hash');
 
 // Prior to running tests, insert data into db
 const { Fragment } = require('../../src/model/fragment');
-
 // save new text fragment to db
 const fragment = new Fragment({
   ownerId: hash('user1@email.com'),
