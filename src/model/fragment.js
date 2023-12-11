@@ -218,7 +218,6 @@ class Fragment {
       'application/json',
       'image/png',
       'image/jpeg',
-      'image/jpg',
       'image/webp',
       'image/gif',
     ];

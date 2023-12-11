@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
           .json(
             response.createErrorResponse(
               415,
-              'Content-Type of fragment sent with request is not supported'
+              'Content-Type of fragment sent with request is not supported:' + existingType
             )
           );
       }
