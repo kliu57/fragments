@@ -8,12 +8,7 @@ user1@email.com:password1
 `Hello S3!`
 
 # Confirm that the server returns a 201, and capture the Location header value to a variable named url
-
 HTTP/1.1 201
-
-# GET the fragment you just created using the url as an authorized user.
-
-# Capture the Location URL into a variable named `url`
 [Captures]
 url: header "Location"
 

@@ -63,13 +63,13 @@ module.exports = async (req, res) => {
         if (fragment.formats.isImage) {
           // Convert image using sharp
           if (convertToType == 'image/png') {
-            convertedData = await sharp(data).png().toBuffer();
-          } else if (convertToType == 'image/jpeg' || convertToType == 'image/jpg') {
-            convertedData = await sharp(data).jpeg().toBuffer();
+            convertedData = await sharp(data).toFormat('png').toBuffer();
+          } else if (convertToType == 'image/jpeg') {
+            convertedData = await sharp(data).toFormat('jpg').toBuffer();
           } else if (convertToType == 'image/webp') {
-            convertedData = await sharp(data).webp().toBuffer();
+            convertedData = await sharp(data).toFormat('webp').toBuffer();
           } else if (convertToType == 'image/gif') {
-            convertedData = await sharp(data).gif().toBuffer();
+            convertedData = await sharp(data).toFormat('gif').toBuffer();
           }
         }
 
@@ -93,11 +93,14 @@ module.exports = async (req, res) => {
       res
         .status(415)
         .json(
-          response.createErrorResponse(415, `a ${currentType} fragment  as a ${convertToType}`)
+          response.createErrorResponse(
+            415,
+            `a ${currentType} fragment cannot be returned as a ${convertToType}`
+          )
         );
     }
   } catch (e) {
     // Fragment not found, return HTTP 404 with error message
-    res.status(404).json(response.createErrorResponse(404, e));
+    res.status(404).json(response.createErrorResponse(404, e.message));
   }
 };

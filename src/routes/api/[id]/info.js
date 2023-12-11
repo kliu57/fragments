@@ -32,6 +32,6 @@ module.exports = async (req, res) => {
     );
   } catch (e) {
     // Fragment not found, return HTTP 404 with error message
-    res.status(404).json(response.createErrorResponse(404, e));
+    res.status(404).json(response.createErrorResponse(404, e.message));
   }
 };
