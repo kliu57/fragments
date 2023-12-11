@@ -189,7 +189,9 @@ class Fragment {
     logger.debug('Called Fragment formats()');
     if (this.isText) {
       if (this.type === 'text/markdown') {
-        return [this.mimeType, 'text/html'];
+        return [this.mimeType, 'text/html', 'text/plain'];
+      } else if (this.type === 'text/html') {
+        return [this.mimeType, 'text/plain'];
       } else {
         return [this.mimeType];
       }
@@ -214,6 +216,11 @@ class Fragment {
       'text/markdown',
       'text/html',
       'application/json',
+      'image/png',
+      'image/jpeg',
+      'image/jpg',
+      'image/webp',
+      'image/gif',
     ];
     return types.includes(value);
   }

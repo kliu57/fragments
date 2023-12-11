@@ -2,9 +2,7 @@
 
 // import functions in src/response.js
 const response = require('../../response');
-
 const { Fragment } = require('../../model/fragment');
-
 const logger = require('../../logger');
 
 /**

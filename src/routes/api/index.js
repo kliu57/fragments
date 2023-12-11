@@ -4,10 +4,8 @@
  * The main entry-point for the v1 version of the fragments API.
  */
 const express = require('express');
-
 // Use https://www.npmjs.com/package/content-type to create/parse Content-Type headers
 const contentType = require('content-type');
-
 const { Fragment } = require('../../model/fragment');
 
 // Create a router on which to mount our API endpoints

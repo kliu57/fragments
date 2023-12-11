@@ -2,14 +2,12 @@
 
 // import functions in src/response.js
 const response = require('../../response');
-
 const { Fragment } = require('../../model/fragment');
-
 const logger = require('../../logger');
 
-// /**
-//  * Creates a new fragment for the current user (i.e., authenticated user)
-//  */
+/**
+ * Creates a new fragment for the current user (i.e., authenticated user)
+ */
 module.exports = async (req, res) => {
   logger.debug('POST /fragments route accessed');
 
